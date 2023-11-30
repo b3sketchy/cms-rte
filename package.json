@@ -9,7 +9,7 @@
     ".": {
       "types": "./dist/types/index.d.ts",
       "require": "./dist/umd/index.js",
-      "default": "./umd/cjs/index.js"
+      "default": "./umd/umd/index.js"
     },
     "./package.json": "./package.json"
   },
