@@ -1,0 +1,139 @@
+(function(global, factory) {
+    if (typeof module === "object" && typeof module.exports === "object") factory(exports, require("react"), require("@contentful/f36-icons"), require("@contentful/rich-text-types"), require("@udecode/plate-basic-marks"), require("emotion"), require("./components/MarkToolbarButton"), require("./helpers"));
+    else if (typeof define === "function" && define.amd) define([
+        "exports",
+        "react",
+        "@contentful/f36-icons",
+        "@contentful/rich-text-types",
+        "@udecode/plate-basic-marks",
+        "emotion",
+        "./components/MarkToolbarButton",
+        "./helpers"
+    ], factory);
+    else if (global = typeof globalThis !== "undefined" ? globalThis : global || self) factory(global.code = {}, global.react, global.f36Icons, global.richTextTypes, global.plateBasicMarks, global.emotion, global.markToolbarButton, global.helpers);
+})(this, function(exports, _react, _f36icons, _richtexttypes, _platebasicmarks, _emotion, _MarkToolbarButton, _helpers) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    function _export(target, all) {
+        for(var name in all)Object.defineProperty(target, name, {
+            enumerable: true,
+            get: all[name]
+        });
+    }
+    _export(exports, {
+        Code: function() {
+            return Code;
+        },
+        ToolbarCodeButton: function() {
+            return ToolbarCodeButton;
+        },
+        ToolbarDropdownCodeButton: function() {
+            return ToolbarDropdownCodeButton;
+        },
+        createCodePlugin: function() {
+            return createCodePlugin;
+        }
+    });
+    _react = /*#__PURE__*/ _interop_require_wildcard(_react);
+    function _getRequireWildcardCache(nodeInterop) {
+        if (typeof WeakMap !== "function") return null;
+        var cacheBabelInterop = new WeakMap();
+        var cacheNodeInterop = new WeakMap();
+        return (_getRequireWildcardCache = function(nodeInterop) {
+            return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
+        })(nodeInterop);
+    }
+    function _interop_require_wildcard(obj, nodeInterop) {
+        if (!nodeInterop && obj && obj.__esModule) {
+            return obj;
+        }
+        if (obj === null || typeof obj !== "object" && typeof obj !== "function") {
+            return {
+                default: obj
+            };
+        }
+        var cache = _getRequireWildcardCache(nodeInterop);
+        if (cache && cache.has(obj)) {
+            return cache.get(obj);
+        }
+        var newObj = {
+            __proto__: null
+        };
+        var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+        for(var key in obj){
+            if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
+                var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+                if (desc && (desc.get || desc.set)) {
+                    Object.defineProperty(newObj, key, desc);
+                } else {
+                    newObj[key] = obj[key];
+                }
+            }
+        }
+        newObj.default = obj;
+        if (cache) {
+            cache.set(obj, newObj);
+        }
+        return newObj;
+    }
+    const ToolbarCodeButton = (0, _MarkToolbarButton.createMarkToolbarButton)({
+        title: 'Code',
+        mark: _richtexttypes.MARKS.CODE,
+        icon: /*#__PURE__*/ _react.createElement(_f36icons.CodeIcon, null)
+    });
+    const ToolbarDropdownCodeButton = (0, _MarkToolbarButton.createMarkToolbarButton)({
+        title: 'Code',
+        mark: _richtexttypes.MARKS.CODE
+    });
+    const styles = {
+        code: (0, _emotion.css)({
+            fontFamily: 'monospace',
+            fontSize: '.9em'
+        })
+    };
+    function Code(props) {
+        return /*#__PURE__*/ _react.createElement("code", {
+            ...props.attributes,
+            className: styles.code
+        }, props.children);
+    }
+    const createCodePlugin = ()=>(0, _platebasicmarks.createCodePlugin)({
+            type: _richtexttypes.MARKS.CODE,
+            component: Code,
+            options: {
+                // We need to define multiple hotkeys here,
+                // - mod+/ -> QWERTY keyboard layout
+                // - mod+shift+7 -> QWERTZ keyboard layout
+                // The workaround like in packages/rich-text/src/plugins/CommandPalette/onKeyDown.ts is sadly not working here,
+                // as `shift+7` is not interpreted as `/` with the `mod` key by the OS.
+                // TODO: there are a lot more different keyboard layouts out there
+                hotkey: [
+                    'mod+/',
+                    'mod+shift+7'
+                ]
+            },
+            handlers: {
+                onKeyDown: (0, _helpers.buildMarkEventHandler)(_richtexttypes.MARKS.CODE)
+            },
+            deserializeHtml: {
+                rules: [
+                    {
+                        validNodeName: [
+                            'CODE',
+                            'PRE'
+                        ]
+                    },
+                    {
+                        validStyle: {
+                            fontFamily: [
+                                'Consolas',
+                                'monospace'
+                            ]
+                        }
+                    }
+                ]
+            }
+        });
+});

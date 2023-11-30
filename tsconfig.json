@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["src", "types"],
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "lib": ["dom", "esnext"],
+    "rootDir": "./src",
+    "baseUrl": "./",
+    "paths": {
+      "*": ["src/*", "node_modules/*"]
+    },
+    "noImplicitAny": false,
+    "allowJs": true,
+    "jsx": "react",
+    "downlevelIteration": true,
+    "resolveJsonModule": true
+  }
+}
