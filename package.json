@@ -3,13 +3,13 @@
   "version": "3.16.2",
   "source": "./src/index.tsx",
   "main": "dist/umd/index.js",
-  "module": "dist/esm/index.js",
+  "module": "dist/umd/index.js",
   "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
       "require": "./dist/umd/index.js",
-      "default": "./umd/umd/index.js"
+      "default": "./dist/umd/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -27,7 +27,7 @@
     "watch:cjs": "yarn build:cjs -w",
     "watch:esm": "yarn build:esm -w",
     "watch:types": "yarn build:types --watch",
-    "build": "yarn build:types && yarn build:cjs && yarn build:esm",
+    "build": "yarn build:types && yarn build:cjs && yarn build:esm && yarn build:umd",
     "build:types": "tsc --outDir dist/types --emitDeclarationOnly",
     "build:umd": "swc src --config-file ../../.swcrc -d dist/umd -C module.type=umd",
     "build:cjs": "swc src --config-file ../../.swcrc -d dist/cjs -C module.type=commonjs",
