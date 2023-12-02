@@ -75,5 +75,6 @@
     return newObj;
   }
 });
+window.GetRichTextToWork = () => true
 window._RichTextEditor = _RichTextEditor
 window.A_TESTING_THIS_UMD = true
