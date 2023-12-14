@@ -26,14 +26,6 @@ export const RichText = ({ model, modelUpdate }) => {
     controls
   } = model
 
-  // update model to null on mount and unmount to ensure value only exists on update
-  React.useEffect(() => {
-    modelUpdate({ value: null })
-    return () => {
-      modelUpdate({ value: null })
-    }
-  }, [])
-
   return (
     <Editor
       height={height || 200}
