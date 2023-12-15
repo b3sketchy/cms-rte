@@ -24,8 +24,6 @@ export const Editor = (props) => {
     );
   }, [props.value, plugins]);
 
-
-
   const plateClassNames = cx(
     styles.editor,
     props.height !== undefined ? css({ height: props.height }) : undefined,
